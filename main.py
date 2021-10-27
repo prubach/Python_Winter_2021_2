@@ -5,7 +5,8 @@
 
 
 def print_hi(name):
-
+    a = 10
+    print(a)
     # Use a breakpoint in the code line below to debug your script.
 #    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 #    print('Hi, {}'.format(name))  # Press Ctrl+F8 to toggle the breakpoint.
