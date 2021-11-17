@@ -1,4 +1,4 @@
-f = 'main.py'
+f = 'data/out.txt'
 with open(f, 'r') as file_in:
     lines = file_in.readlines()
     i = 0
