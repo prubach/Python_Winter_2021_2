@@ -17,3 +17,6 @@ print('Sum space: {}'.format(sum_bytes))
 
 # 1. Include summing space occupied for folders with their content
 # Hint: use recursion...
+# Step 1: create a function that iterates over files in a folder and returns the sum of the size
+# Step 2: add a condition for the case of a folder - then the function should call itself for
+#         the subfolder as input parameter
