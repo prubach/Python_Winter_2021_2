@@ -22,6 +22,8 @@ class Account:
         self.customer = customer
         self._balance = 0
 
+    # TODO - add methods "charge" and "deposit" that will change the balance
+
     def __repr__(self):
         return '{}[{},{},{}]'.format(self.__class__.__name__, self.id, self.customer.last_name, self._balance)
 
@@ -38,24 +40,35 @@ class CheckingAccount(Account):
 
 
 class Bank:
-    cust_list = []
-    acc_list = []
+    def __init__(self):
+        self.cust_list = []
+        self.acc_list = []
+
     def new_customer(self, first_name, last_name, email):
         #TODO - create a new customer, add it to a list of customers
+        c = Customer(first_name, last_name, email)
+        self.cust_list.append(c)
+        return c
 
     def new_account(self, customer, is_savings=True):
         #TODO - create a new account and add it to the list of accounts
+        # if is_savings:
+        #     a = SavingsAccount(customer)
+        # else:
+        #     a = CheckingAccount(customer)
+        a = SavingsAccount(customer) if is_savings else CheckingAccount(customer)
+        self.acc_list.append(a)
+        return a
 
+    def __repr__(self):
+        return 'Bank\n{}\n{}'.format(self.cust_list, self.acc_list)
 
 b = Bank()
 
-c1 = Customer('John', 'Brown', 'john@brown.com')
-c2 = Customer('Anna', 'Smith', 'anne@smith.com')
+c1 = b.new_customer('John', 'Brown', 'john@brown.com')
+c2 = b.new_customer('Anna', 'Smith', 'anne@smith.com')
 
-a1 = CheckingAccount(c1)
-a2 = SavingsAccount(c1)
+a1 = b.new_account(c1, is_savings=True)
+a2 = b.new_account(c1, is_savings=False)
 
-print(c1)
-print(c2)
-print(a1)
-print(a2)
+print(b)
