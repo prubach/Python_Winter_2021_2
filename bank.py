@@ -23,7 +23,7 @@ class Account:
         self._balance = 0
 
     def __repr__(self):
-        return 'Account[{},{},{}]'.format(self.id, self.customer.last_name, self._balance)
+        return '{}[{},{},{}]'.format(self.__class__.__name__, self.id, self.customer.last_name, self._balance)
 
 
 class SavingsAccount(Account):
@@ -37,4 +37,25 @@ class CheckingAccount(Account):
     pass
 
 
+class Bank:
+    cust_list = []
+    acc_list = []
+    def new_customer(self, first_name, last_name, email):
+        #TODO - create a new customer, add it to a list of customers
 
+    def new_account(self, customer, is_savings=True):
+        #TODO - create a new account and add it to the list of accounts
+
+
+b = Bank()
+
+c1 = Customer('John', 'Brown', 'john@brown.com')
+c2 = Customer('Anna', 'Smith', 'anne@smith.com')
+
+a1 = CheckingAccount(c1)
+a2 = SavingsAccount(c1)
+
+print(c1)
+print(c2)
+print(a1)
+print(a2)
