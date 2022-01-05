@@ -60,6 +60,10 @@ class Bank:
         self.acc_list.append(a)
         return a
 
+    def transfer(self, from_account_id, to_account_id, amount):
+        #TODO - please note that you might need to find the "from" and "to" accounts in the list
+        # based on the ids provided as input
+
     def __repr__(self):
         return 'Bank\n{}\n{}'.format(self.cust_list, self.acc_list)
 
