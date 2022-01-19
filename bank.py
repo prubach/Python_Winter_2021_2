@@ -36,6 +36,24 @@ class Account:
         self._balance = 0
 
     # TODO - add methods "charge" and "deposit" that will change the balance
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+            print('New deposit updated as: ' + str(self._balance))
+        else:
+            raise NegativeAmountError('The amount is negative')
+
+    def charge(self, amount):
+        if amount > self._balance:
+            raise NotEnoughMoneyError(
+                "You don't have enough Balance. Your Current Balance is " + str(self._balance)
+                , self._balance)
+        if amount <= 0:
+            raise NegativeAmountError("The amount is negative. Please input the positive amount")
+        else:
+            self._balance -= amount
+            print("Charge amount is: " + str(amount))
+            print("New Balance updated as: " + str(self._balance))
 
     def __repr__(self):
         return '{}[{},{},{}]'.format(self.__class__.__name__, self.id, self.customer.last_name, self._balance)
