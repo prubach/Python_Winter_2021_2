@@ -138,14 +138,12 @@ class Bank(Base):
         return 'Bank[{}]:\n{}\n{}'.format(self.name, self.customers, self.accounts)
 
 
-
 class DBSession:
     current_db_session = None
 
     def engine(self):
         url = 'sqlite:///bank.db'
         return create_engine(url, echo=True)
-
 
     def db_session(self):
         """Opens a new database connection if there is none yet for the

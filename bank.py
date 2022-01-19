@@ -35,7 +35,19 @@ class Account:
         self.customer = customer
         self._balance = 0
 
-    # TODO - add methods "charge" and "deposit" that will change the balance
+    def deposit(self, amount):
+        # TODO - add validation to prevent misuse
+        if amount < 0:
+            raise NegativeAmountError('{0} amount provided to deposit: {1}'.format(self.id, amount))
+        self._balance += amount
+
+    def charge(self, amount):
+        #TODO - add validation to prevent misuse
+        if amount < 0:
+            raise NegativeAmountError('{0} amount provided to deposit: {1}'.format(self.id, amount))
+        if amount > self._balance:
+            raise NotEnoughMoneyError('{0} amount provided to deposit: {1}'.format(self.id, amount))
+        self._balance -= amount
     def deposit(self, amount):
         if amount > 0:
             self._balance += amount
@@ -92,8 +104,10 @@ class Bank:
         return a
 
     def transfer(self, from_account_id, to_account_id, amount):
-        #TODO - please note that you might need to find the "from" and "to" accounts in the list
-        # based on the ids provided as input
+        from_acc = self.acc_list[from_account_id-1]
+        to_acc = self.acc_list[to_account_id-1]
+        from_acc.charge(amount)
+        to_acc.deposit(amount)
 
     def __repr__(self):
         return 'Bank\n{}\n{}'.format(self.cust_list, self.acc_list)
@@ -105,5 +119,12 @@ c2 = b.new_customer('Anna', 'Smith', 'anne@smith.com')
 
 a1 = b.new_account(c1, is_savings=True)
 a2 = b.new_account(c1, is_savings=False)
+try:
+    a1.deposit(100)
+    a2.deposit(50)
 
+    print(b)
+    b.transfer(a1.id, a2.id, 100)
+except BankError as be:
+    print('Got error: {}'.format(be))
 print(b)
